@@ -13,6 +13,7 @@ return(
            })}
 
         </div>
+        
 )
 }
 export default Album;
