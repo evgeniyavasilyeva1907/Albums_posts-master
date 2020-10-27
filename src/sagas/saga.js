@@ -5,7 +5,8 @@ export function* sagaWatcher() {
     yield all([
         takeEvery('ALBUMS/FETCHED_SAGA', getAlbums),
         takeEvery('POSTS/FETCHED_SAGA', getPosts),
-        takeEvery('PHOTOS/FETCHED_SAGA', getPhotos)
+        takeEvery('PHOTOS/FETCHED_SAGA', getPhotos),
+        takeEvery('PHOTO/DELETE_SAGA', deletePhoto)
     ])
 }
 
@@ -51,6 +52,18 @@ export function* getPhotos(props) {
         })
     }
     catch(error) {
-        console.log(error)
+       yield console.log(error)
+    }
+}
+export function* deletePhoto(props) {
+    let idPhoto = props.payload;
+    try{
+        yield put({
+            type: 'PHOTOS/DELETE_PHOTO',
+            payload: idPhoto
+        })
+    }
+    catch(error){
+        yield console.log(error)
     }
 }
