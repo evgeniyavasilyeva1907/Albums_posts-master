@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Post({posts}){
+function Post({ posts }){
 return(
     <div className="PostsBoard">
            {posts.map((item, index)=>{
