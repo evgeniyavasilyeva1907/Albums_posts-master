@@ -14,13 +14,13 @@ function PhotosBoard(props) {
     const deletePhoto = (id) => {
         deletePhotoSaga(id)
     }
-    const editTitle = (id, title) =>{
+    const editTitle = (id, title) => {
         editTitlePhoto(id, title)
     }
     return (<div>
         <Photo photos={photos}
-            deletePhoto={deletePhoto} 
-            editTitle={editTitle}/>
+            deletePhoto={deletePhoto}
+            editTitle={editTitle} />
     </div>)
 }
 
@@ -39,10 +39,12 @@ const mapDispatchToProps = dispatch => {
             type: 'PHOTO/DELETE_SAGA',
             payload: id
         }),
-        editTitlePhoto: (value) => dispatch({
-            type: 'TITLE/EDIT_PHOTO_TITLE_SAGA',
-            payload: value
-        })
+        editTitlePhoto: (title, id) =>
+            dispatch({
+                type: 'TITLE/EDIT_PHOTO_TITLE_SAGA',
+                payload: { title, id }
+            })
+
     }
 }
 

@@ -5,7 +5,9 @@ import CachedIcon from '@material-ui/icons/Cached';
 
 function Photo({ photos, deletePhoto, editTitle }) {
     const [activeItem, setActimeItem] = useState({});
+    const [OpenEdit, setOpenEdit] = useState(false)
     const [open, setOpen] = useState(false)
+    const [editText, setEditText] = useState('')
 
     const getFullInfo = (item) => {
         setActimeItem(item);
@@ -15,11 +17,16 @@ function Photo({ photos, deletePhoto, editTitle }) {
     const handleOpen_Close = () => {
         setOpen(!open)
     }
-    const changePhoto = (item) =>{
+    const changePhoto = (item) => {
         console.log(item)
     }
-    const edit = () =>{
-        console.log('edit')
+    const edit = (title, id) => {
+        editTitle(title, id)
+        setOpenEdit(!OpenEdit)
+    }
+    const isOpenEdit = () => {
+        setOpenEdit(!OpenEdit)
+        setEditText(activeItem.title)
     }
 
     return (
@@ -32,7 +39,7 @@ function Photo({ photos, deletePhoto, editTitle }) {
                             alt={item.title}
                             onClick={() => getFullInfo(item)}></img>
                         <DeleteIcon className='DeleteIcon' color="disabled" onClick={() => deletePhoto(item.id)} />
-                        <input type='file' name='file-input' onChange={()=>changePhoto(item.id)}></input>
+                        <input type='file' name='file-input' onChange={() => changePhoto(item.id)}></input>
                         <CachedIcon className='Reload' color="disabled" />
                     </div>
                 )
@@ -44,7 +51,17 @@ function Photo({ photos, deletePhoto, editTitle }) {
                 <div className='ModalWindow'>
                     <div><img src={activeItem.url} alt={activeItem.title}></img></div>
                     <div>{activeItem.title}</div>
-                    <button onClick={()=>editTitle(activeItem)}>Edit title</button>
+                    <button onClick={isOpenEdit}>Edit title</button>
+                </div>
+            </Modal>
+            <Modal
+                open={OpenEdit}
+                onClose={isOpenEdit}
+            >
+                <div className="ModalWindow">
+                    <div>Change title</div>
+                    <input value={editText} onChange={(e) => setEditText(e.target.value)}></input>
+                    <button onClick={() => edit(editText, activeItem.id)}>Edit</button>
                 </div>
             </Modal>
 
