@@ -6,7 +6,8 @@ export function* sagaWatcher() {
         takeEvery('ALBUMS/FETCHED_SAGA', getAlbums),
         takeEvery('POSTS/FETCHED_SAGA', getPosts),
         takeEvery('PHOTOS/FETCHED_SAGA', getPhotos),
-        takeEvery('PHOTO/DELETE_SAGA', deletePhoto)
+        takeEvery('PHOTO/DELETE_SAGA', deletePhoto),
+        takeEvery('TITLE/EDIT_PHOTO_TITLE_SAGA', editTitle)
     ])
 }
 
@@ -27,7 +28,7 @@ export function* getAlbums() {
 }
 
 export function* getPosts() {
-    
+
     try {
         const URL = 'https://jsonplaceholder.typicode.com/posts';
         const { data } = yield axios.get(URL)
@@ -42,28 +43,42 @@ export function* getPosts() {
     }
 }
 export function* getPhotos(props) {
-    try{
+    try {
         const URL = `https://jsonplaceholder.typicode.com/albums/${props.payload}/photos`
-        const {data} =yield axios.get(URL)
+        const { data } = yield axios.get(URL)
 
         yield put({
             type: 'PHOTOS/GET_PHOTOS',
             payload: data
         })
     }
-    catch(error) {
-       yield console.log(error)
+    catch (error) {
+        yield console.log(error)
     }
 }
 export function* deletePhoto(props) {
     let idPhoto = props.payload;
-    try{
+    try {
         yield put({
             type: 'PHOTOS/DELETE_PHOTO',
             payload: idPhoto
         })
     }
-    catch(error){
+    catch (error) {
+        yield console.log(error)
+    }
+}
+
+export function* editTitle(props) {
+    let titlePhoto = props.payload.title;
+    let idPhoto = props.payload.id
+    try {
+        yield put({
+            type: 'PHOTOS/EDIT_TITLE',
+            payload: {titlePhoto: titlePhoto, id: idPhoto}
+        })
+    }
+    catch (error) {
         yield console.log(error)
     }
 }

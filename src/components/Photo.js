@@ -3,7 +3,7 @@ import Modal from '@material-ui/core/Modal';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CachedIcon from '@material-ui/icons/Cached';
 
-function Photo({ photos, deletePhoto }) {
+function Photo({ photos, deletePhoto, editTitle }) {
     const [activeItem, setActimeItem] = useState({});
     const [open, setOpen] = useState(false)
 
@@ -14,6 +14,12 @@ function Photo({ photos, deletePhoto }) {
 
     const handleOpen_Close = () => {
         setOpen(!open)
+    }
+    const changePhoto = (item) =>{
+        console.log(item)
+    }
+    const edit = () =>{
+        console.log('edit')
     }
 
     return (
@@ -26,6 +32,7 @@ function Photo({ photos, deletePhoto }) {
                             alt={item.title}
                             onClick={() => getFullInfo(item)}></img>
                         <DeleteIcon className='DeleteIcon' color="disabled" onClick={() => deletePhoto(item.id)} />
+                        <input type='file' name='file-input' onChange={()=>changePhoto(item.id)}></input>
                         <CachedIcon className='Reload' color="disabled" />
                     </div>
                 )
@@ -37,6 +44,7 @@ function Photo({ photos, deletePhoto }) {
                 <div className='ModalWindow'>
                     <div><img src={activeItem.url} alt={activeItem.title}></img></div>
                     <div>{activeItem.title}</div>
+                    <button onClick={()=>editTitle(activeItem)}>Edit title</button>
                 </div>
             </Modal>
 
