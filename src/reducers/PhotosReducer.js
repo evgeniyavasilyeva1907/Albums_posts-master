@@ -9,14 +9,22 @@ function PhotosReducer(state = initialState, action) {
             const newstate = state.PhotosList.filter(e => e.id !== action.payload)
             return { ...state, PhotosList: newstate };
         case 'PHOTOS/EDIT_TITLE':
-            console.log(action.payload)
-            const copyState = state.PhotosList.map((photo, index) => {
+            const copyState = state.PhotosList.map((photo) => {
                 if (photo.id === action.payload.id) {
                     photo.title = action.payload.titlePhoto
                 }
                 return photo
             })
-            return { ...state, PhotosList: copyState }
+            return { ...state, PhotosList: copyState };
+        case 'PHOTOS/UPLOAD_PHOTO':
+            const newState = state.PhotosList.map((photo) => {
+                if (photo.id === action.payload.id) {
+                    photo.url = action.payload.url;
+                    photo.thumbnailUrl = action.payload.url
+                }
+                return photo
+            })
+            return { ...state, PhotosList: newState }
         default:
             return state
     }

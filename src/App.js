@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import './App.css';
 import {
   Switch,
@@ -12,10 +12,28 @@ import Posts from './containers/Posts'
 
 
 function App() {
+  const [image, getImage] = useState()
+  const inputEl = useRef(null);
+  const onButtonClick = () => {
+    // `current` указывает на смонтированный элемент `input`
+    inputEl.current.click();
+  };
+  const upload = (elem) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(elem)
+    reader.onload = function () {
+      getImage(reader.result)
+    }
+  }
+
+
 
   return (
     <div className="App">
       <h1>My application</h1>
+      <input ref={inputEl} type="file" onChange={() => upload(inputEl.current.files[0])} />
+      <button onClick={onButtonClick}>Установить фокус на поле ввода</button>
+      <img src={image} ></img>
       <div className='container'>
         <div className='Menu'>
           <NavLink activeClassName='active' to='/' exact> <Button variant="contained">Main Page</Button> </NavLink>

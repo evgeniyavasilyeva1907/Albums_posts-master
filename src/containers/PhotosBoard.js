@@ -4,7 +4,7 @@ import { withRouter } from "react-router";
 import Photo from './../components/Photo'
 
 function PhotosBoard(props) {
-    const { getPhotos, photos, match, deletePhotoSaga, editTitlePhoto } = props
+    const { getPhotos, photos, match, deletePhotoSaga, editTitlePhoto, reloadPhoto } = props
 
     useEffect(() => {
         const id = +match.params.albumid
@@ -17,10 +17,16 @@ function PhotosBoard(props) {
     const editTitle = (id, title) => {
         editTitlePhoto(id, title)
     }
+
+    const photoReload = (image, id) => {
+        reloadPhoto(image, id)
+    }
+
     return (<div>
         <Photo photos={photos}
             deletePhoto={deletePhoto}
-            editTitle={editTitle} />
+            editTitle={editTitle}
+            reload={photoReload} />
     </div>)
 }
 
@@ -43,8 +49,12 @@ const mapDispatchToProps = dispatch => {
             dispatch({
                 type: 'TITLE/EDIT_PHOTO_TITLE_SAGA',
                 payload: { title, id }
+            }),
+        reloadPhoto: (image, id) =>
+            dispatch({
+                type: 'PHOTOS/RELOAD_PHOTO_SAGA',
+                payload: { image, id }
             })
-
     }
 }
 

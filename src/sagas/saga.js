@@ -7,7 +7,8 @@ export function* sagaWatcher() {
         takeEvery('POSTS/FETCHED_SAGA', getPosts),
         takeEvery('PHOTOS/FETCHED_SAGA', getPhotos),
         takeEvery('PHOTO/DELETE_SAGA', deletePhoto),
-        takeEvery('TITLE/EDIT_PHOTO_TITLE_SAGA', editTitle)
+        takeEvery('TITLE/EDIT_PHOTO_TITLE_SAGA', editTitle),
+        takeEvery('PHOTOS/RELOAD_PHOTO_SAGA', reloadPhoto)
     ])
 }
 
@@ -79,6 +80,19 @@ export function* editTitle(props) {
         })
     }
     catch (error) {
+        yield console.log(error)
+    }
+}
+export function* reloadPhoto (props) {
+    let idPhoto = props.payload.id;
+    let urlPhoto = props.payload.image;
+    try {
+        yield put({
+            type: 'PHOTOS/UPLOAD_PHOTO',
+            payload: {id: idPhoto, url: urlPhoto}
+        })
+    }
+    catch(error) {
         yield console.log(error)
     }
 }
