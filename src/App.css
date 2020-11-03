@@ -112,15 +112,28 @@ Button {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-content: space-around
 }
 .DeleteIcon{
-  position: relative;
   right: 50%;
   bottom: 10%;
 }
 
 .Reload{
-  position: relative;
   right: 50%;
   bottom: 10%;
+}
+.photo{
+  min-width: 20%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.photo img{
+  width: 150px;
+  height: 150px;
+}
+.ModalWindow img{
+  max-width: 600px;
+  height: auto;
 }
