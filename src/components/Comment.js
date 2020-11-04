@@ -3,9 +3,11 @@ import React from 'react'
 function Comment({ comments, post }) {
     debugger
     return (
-        <div>
-            <h3>{post.title}</h3>
-            <div>{post.body} </div>
+        <div >
+            <div className='Post'>
+                <h3>{post.title}</h3>
+                <div>{post.body} </div>
+            </div>
             {comments.map((item, index) => {
                 return (
                     <div key={index}>
