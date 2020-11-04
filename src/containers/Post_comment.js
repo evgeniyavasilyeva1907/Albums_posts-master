@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
+import Comment from './../components/Comment'
 
 function Post_comment(props) {
     const { comments, posts, getComments, match } = props
-    debugger
+    const id = match.params.postid
     useEffect(() => {
-        const id = +match.params.postid
         getComments(id)
-    }, [getComments, match.params.postid])
+    }, [id])
     return (
-        <div>
-            <h1>Hello</h1>
-        </div>
+        <Comment
+            comments={comments}
+            post={posts[id-1]} />
+
     )
 }
 const mapStateToProps = state => {
