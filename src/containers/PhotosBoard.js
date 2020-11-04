@@ -22,12 +22,12 @@ function PhotosBoard(props) {
         reloadPhoto(image, id)
     }
 
-    return (<div>
+    return (
         <Photo photos={photos}
             deletePhoto={deletePhoto}
             editTitle={editTitle}
             reload={photoReload} />
-    </div>)
+    )
 }
 
 const mapstateToProps = state => {

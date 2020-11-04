@@ -7,7 +7,9 @@ function Album({ albums }) {
         <div className="AlbumsBoard">
             {albums.map((item, index) => {
                 return (
-                    <NavLink className='Album' activeClassName='active' key={index} to={`albums/${item.id}`}><div  >{item.title}</div> </NavLink>
+                    <NavLink className='Album' activeClassName='active' key={index} to={`albums/${item.id}`}>
+                        <div>{item.title}</div>
+                    </NavLink>
                 )
             })}
         </div>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import './App.css';
 import {
   Switch,
@@ -9,31 +9,15 @@ import PhotosBoard from './containers/PhotosBoard'
 import Button from '@material-ui/core/Button';
 import Albums from './containers/Albums';
 import Posts from './containers/Posts'
+import Post_comment from './containers/Post_comment'
 
 
 function App() {
-  const [image, getImage] = useState()
-  const inputEl = useRef(null);
-  const onButtonClick = () => {
-    // `current` указывает на смонтированный элемент `input`
-    inputEl.current.click();
-  };
-  const upload = (elem) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(elem)
-    reader.onload = function () {
-      getImage(reader.result)
-    }
-  }
-
-
 
   return (
     <div className="App">
       <h1>My application</h1>
-      <input ref={inputEl} type="file" onChange={() => upload(inputEl.current.files[0])} />
-      <button onClick={onButtonClick}>Установить фокус на поле ввода</button>
-      <img src={image} ></img>
+     
       <div className='container'>
         <div className='Menu'>
           <NavLink activeClassName='active' to='/' exact> <Button variant="contained">Main Page</Button> </NavLink>
@@ -48,10 +32,11 @@ function App() {
             <Route path='/albums' exact>
               <Albums />
             </Route>
-            <Route path='/posts'>
+            <Route path='/posts' exact>
               <Posts />
             </Route>
             <Route path='/albums/:albumid' component={PhotosBoard} />
+            <Route path='/posts/:postid' component={Post_comment} />
           </Switch>
         </div>
 

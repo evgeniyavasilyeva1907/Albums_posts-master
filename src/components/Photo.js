@@ -9,7 +9,6 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
     const [open, setOpen] = useState(false)
     const [editText, setEditText] = useState('')
 
-
     const getFullInfo = (item) => {
         setActimeItem(item);
         handleOpen_Close();
@@ -48,13 +47,12 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
         <div className='PhotosBoard'>
             {photos.map((item, index) => {
                 return (
-                    <div key={index}>
-                        <img className='photo'
+                    <div key={index} className='photo'>
+                        <img
                             src={item.thumbnailUrl}
                             alt={item.title}
                             onClick={() => getFullInfo(item)}></img>
                         <DeleteIcon className='DeleteIcon' color="disabled" onClick={() => deletePhoto(item.id)} />
-
                     </div>
                 )
             })}
@@ -78,10 +76,8 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
                     <div>Change title</div>
                     <input value={editText} onChange={(e) => setEditText(e.target.value)}></input>
                     <button onClick={() => edit(editText, activeItem.id)}>Edit</button>
-
                 </div>
             </Modal>
-
         </div>
     )
 }

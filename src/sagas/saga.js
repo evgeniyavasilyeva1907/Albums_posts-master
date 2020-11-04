@@ -8,7 +8,8 @@ export function* sagaWatcher() {
         takeEvery('PHOTOS/FETCHED_SAGA', getPhotos),
         takeEvery('PHOTO/DELETE_SAGA', deletePhoto),
         takeEvery('TITLE/EDIT_PHOTO_TITLE_SAGA', editTitle),
-        takeEvery('PHOTOS/RELOAD_PHOTO_SAGA', reloadPhoto)
+        takeEvery('PHOTOS/RELOAD_PHOTO_SAGA', reloadPhoto),
+        takeEvery('COMMENTS/FETCHED_SAGA', getComments)
     ])
 }
 
@@ -76,23 +77,37 @@ export function* editTitle(props) {
     try {
         yield put({
             type: 'PHOTOS/EDIT_TITLE',
-            payload: {titlePhoto: titlePhoto, id: idPhoto}
+            payload: { titlePhoto: titlePhoto, id: idPhoto }
         })
     }
     catch (error) {
         yield console.log(error)
     }
 }
-export function* reloadPhoto (props) {
+export function* reloadPhoto(props) {
     let idPhoto = props.payload.id;
     let urlPhoto = props.payload.image;
     try {
         yield put({
             type: 'PHOTOS/UPLOAD_PHOTO',
-            payload: {id: idPhoto, url: urlPhoto}
+            payload: { id: idPhoto, url: urlPhoto }
         })
     }
-    catch(error) {
+    catch (error) {
+        yield console.log(error)
+    }
+}
+export function* getComments(props) {
+    try {
+        const URL = `https://jsonplaceholder.typicode.com/posts/${props.payload}/comments`
+        const { data } = yield axios.get(URL)
+
+        yield put({
+            type: 'COMMENTS/GET_COMMENTS',
+            payload: data
+        })
+    }
+    catch (error) {
         yield console.log(error)
     }
 }
