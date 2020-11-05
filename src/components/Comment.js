@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 function Comment({ comments, post, remove }) {
-    debugger
+    const [text, setText] = useState();
+    console.log(text)
     return (
         <div className="post-comment">
             <div className='Post'>
@@ -13,15 +16,23 @@ function Comment({ comments, post, remove }) {
                     <div key={index} className='comment'>
                         <div>
                             <span className='name'>Name: </span>
-                             {item.name}
+                            {item.name}
                             <span className='email'> email: </span>
-                             {item.email}
+                            {item.email}
                         </div>
                         <div>{item.body}</div>
-                        <button onClick={()=> remove(item.id)}>Remove comment</button>
+                        <Button onClick={() => remove(item.id)} color="primary">Remove comment</Button>
                     </div>
                 )
             })}
+            <TextField id="outlined-multiline-static"
+                label="Comment"
+                multiline
+                rows={3}
+                defaultValue="Your comment"
+                variant="outlined"
+                onChange={(e)=> setText(e.target.value)} value={text}/>
+            <Button variant="contained">Save comment</Button>
         </div>)
 }
 export default Comment
