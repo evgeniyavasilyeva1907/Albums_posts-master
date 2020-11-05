@@ -103,8 +103,8 @@ Button {
   margin: auto;
 }
 .Post{
-  margin: 5px;
   background-color:  #c9e9ff;
+  margin: 5px 0;
 }
 .PhotosBoard{
   display: flex;
@@ -148,4 +148,17 @@ a{
 }
 .post-body{
   color: #a0a0a0
+}
+.name, .email {
+  font-weight: bold;
+}
+.comment{
+  background-color: rgba(190,190,190,0.3);
+  margin: 5px 0;
+}
+.post-comment{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto
 }
