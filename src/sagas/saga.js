@@ -10,7 +10,8 @@ export function* sagaWatcher() {
         takeEvery('TITLE/EDIT_PHOTO_TITLE_SAGA', editTitle),
         takeEvery('PHOTOS/RELOAD_PHOTO_SAGA', reloadPhoto),
         takeEvery('COMMENTS/FETCHED_SAGA', getComments),
-        takeEvery('COMMENTS/DELETE_COMMENT_SAGA', deleteComment)
+        takeEvery('COMMENTS/DELETE_COMMENT_SAGA', deleteComment),
+        takeEvery('COMMENTS/ADD_COMMENT_SAGA', addComment)
     ])
 }
 
@@ -119,6 +120,19 @@ export function* deleteComment(props) {
         yield put({
             type: 'COMMENTS/DELETE_COMMENT',
             payload: idPhoto
+        })
+    }
+    catch (error) {
+        yield console.log(error)
+    }
+}
+
+export function* addComment(props) {
+    let newComment = props.payload;
+    try {
+        yield put({
+            type: 'COMMENTS/ADD_COMMENT',
+            payload: newComment
         })
     }
     catch (error) {

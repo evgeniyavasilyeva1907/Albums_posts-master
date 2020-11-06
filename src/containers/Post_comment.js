@@ -4,21 +4,26 @@ import { withRouter } from "react-router";
 import Comment from './../components/Comment'
 
 function Post_comment(props) {
-    const { comments, posts, getComments, match, deleteComment } = props
+    const { comments, posts, getComments, match, deleteComment, addComment } = props
     const id = match.params.postid
     const removeComment = (id) => {
         deleteComment(id)
     }
     useEffect(() => {
         getComments(id)
-    }, [id])
+    }, [getComments, id])
+
+    const newComment = (comment) => {
+        addComment(comment)
+    }
 
 
     return (
         <Comment
             comments={comments}
             post={posts[id - 1]}
-            remove={removeComment} />
+            remove={removeComment}
+            add={newComment} />
 
     )
 }
@@ -37,6 +42,10 @@ const mapDispatchToProps = dispatch => {
         deleteComment: (id) => dispatch({
             type: 'COMMENTS/DELETE_COMMENT_SAGA',
             payload: id
+        }),
+        addComment: (comment) => dispatch({
+            type: 'COMMENTS/ADD_COMMENT_SAGA',
+            payload: comment
         })
     }
 }

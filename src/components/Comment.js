@@ -2,9 +2,22 @@ import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-function Comment({ comments, post, remove }) {
+function Comment({ comments, post, remove, add }) {
     const [text, setText] = useState();
-    console.log(text)
+
+    const addComment = () =>{
+        if(text) {
+            const comment = {
+                postId: post.id,
+                name: 'Evgeniya',
+                email: '123@email.com',
+                body: text.trim()
+            }
+            add(comment)
+        }
+        else (console.log('Заполните поле ввода'))
+    }
+    
     return (
         <div className="post-comment">
             <div className='Post'>
@@ -32,7 +45,7 @@ function Comment({ comments, post, remove }) {
                 defaultValue="Your comment"
                 variant="outlined"
                 onChange={(e)=> setText(e.target.value)} value={text}/>
-            <Button variant="contained">Save comment</Button>
+            <Button variant="contained" onClick={addComment}>Save comment</Button>
         </div>)
 }
 export default Comment
