@@ -11,7 +11,8 @@ function Comment({ comments, post, remove, add }) {
                 postId: post.id,
                 name: 'Evgeniya',
                 email: '123@email.com',
-                body: text.trim()
+                body: text.trim(),
+                id: comments.length+1
             }
             add(comment)
         }
