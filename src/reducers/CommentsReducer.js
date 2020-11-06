@@ -1,6 +1,7 @@
 const commentsList = [];
 const initialState = { commentsList }
-let counter = commentsList.length;
+let counter = commentsList.length+5;
+
 
 function CommentsReducer(state = initialState, action) {
     switch (action.type) {
@@ -11,7 +12,9 @@ function CommentsReducer(state = initialState, action) {
             return { ...state, commentsList: newState };
         case 'COMMENTS/ADD_COMMENT':
             const copyState = [...state.commentsList];
+            counter++
             let obj = action.payload;
+            obj['id'] = counter
             copyState.push(obj)
             return { ...state, commentsList: copyState }
         default:

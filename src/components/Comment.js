@@ -1,24 +1,23 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 function Comment({ comments, post, remove, add }) {
     const [text, setText] = useState();
 
-    const addComment = () =>{
-        if(text) {
+    const addComment = () => {
+        if (text) {
             const comment = {
                 postId: post.id,
                 name: 'Evgeniya',
                 email: '123@email.com',
                 body: text.trim(),
-                id: comments.length+1
             }
             add(comment)
         }
         else (console.log('Заполните поле ввода'))
     }
-    
+
     return (
         <div className="post-comment">
             <div className='Post'>
@@ -45,7 +44,7 @@ function Comment({ comments, post, remove, add }) {
                 rows={3}
                 defaultValue="Your comment"
                 variant="outlined"
-                onChange={(e)=> setText(e.target.value)} value={text}/>
+                onChange={(e) => setText(e.target.value)} value={text} />
             <Button variant="contained" onClick={addComment}>Save comment</Button>
         </div>)
 }
