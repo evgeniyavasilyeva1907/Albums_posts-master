@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import Modal from '@material-ui/core/Modal';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CachedIcon from '@material-ui/icons/Cached';
+import Button from '@material-ui/core/Button';
 
 function Photo({ photos, deletePhoto, editTitle, reload }) {
     const [activeItem, setActimeItem] = useState({});
@@ -59,12 +60,13 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
             <Modal
                 open={open}
                 onClose={handleOpen_Close}
+                style={{ overflow: "auto" }}
             >
                 <div className='ModalWindow'>
-                    <div><img src={activeItem.url} alt={activeItem.title}></img></div>
+                    <img src={activeItem.url} alt={activeItem.title}></img>
                     <div>{activeItem.title}</div>
-                    <button onClick={isOpenEdit}>Edit title</button>
-                    <input ref={inputEl} type='file' name='file-input' onChange={() => upload(inputEl.current.files[0], activeItem.id)} ></input>
+                    <Button variant="contained" onClick={isOpenEdit}>Edit title</Button>
+                    <input className='load-input' ref={inputEl} type='file' name='file-input' onChange={() => upload(inputEl.current.files[0], activeItem.id)} ></input>
                     <CachedIcon className='Reload' color="disabled" onClick={onButtonClick} />
                 </div>
             </Modal>
@@ -75,7 +77,7 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
                 <div className="ModalWindow">
                     <div>Change title</div>
                     <input value={editText} onChange={(e) => setEditText(e.target.value)}></input>
-                    <button onClick={() => edit(editText, activeItem.id)}>Edit</button>
+                    <Button variant="contained" onClick={() => edit(editText, activeItem.id)}>Edit</Button>
                 </div>
             </Modal>
         </div>
