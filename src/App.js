@@ -9,7 +9,8 @@ import PhotosBoard from './containers/PhotosBoard'
 import Button from '@material-ui/core/Button';
 import Albums from './containers/Albums';
 import Posts from './containers/Posts'
-import Post_comment from './containers/Post_comment'
+import Post_comment from './containers/Post_comment';
+import Statistic from './containers/Statistic'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <NavLink activeClassName='active' to='/' exact> <Button variant="contained">Main Page</Button> </NavLink>
         <NavLink activeClassName='active' to='/albums' exact> <Button variant="contained">Albums</Button> </NavLink>
         <NavLink activeClassName='active' to='/posts' exact> <Button variant="contained">Posts</Button> </NavLink>
+        <NavLink activeClassName='active' to='/statistic' exact> <Button variant="contained">Statistic</Button> </NavLink>
       </div>
       <h1>My application</h1>
       <div className='container'>
@@ -43,6 +45,9 @@ For posts and albums you need to provide statitics: display information as chart
             </Route>
             <Route path='/posts' exact>
               <Posts />
+            </Route>
+            <Route path='/statistic' exact >
+              <Statistic/>
             </Route>
             <Route path='/albums/:albumid' component={PhotosBoard} />
             <Route path='/posts/:postid' component={Post_comment} />
