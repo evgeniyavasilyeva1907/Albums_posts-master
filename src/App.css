@@ -118,16 +118,19 @@ Button {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .DeleteIcon{
   position: absolute;
   top: 5px;
   left: 5px;
+  cursor: pointer;
 }
 
 .Reload{
   right: 50%;
   bottom: 10%;
+  cursor: pointer;
 }
 .photo{
   margin-right: 10px;

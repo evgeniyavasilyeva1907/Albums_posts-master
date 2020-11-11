@@ -4,16 +4,9 @@ import { withRouter } from "react-router";
 import Comment from "./../components/Comment";
 
 function Post_comment(props) {
-  const {
-    comments,
-    posts,
-    getComments,
-    match,
-    deleteComment,
-    addComment,
-  } = props;
+  const { comments, posts, getComments, match, deleteComment, addComment } = props;
   const id = match.params.postid;
-  useEffect(() => { //TODO тут тоде, сначала useEffect, потом уже обычные функции
+  useEffect(() => { 
     getComments(id);
   }, [getComments, id]);
 
@@ -24,13 +17,14 @@ function Post_comment(props) {
   const newComment = (comment) => {
     addComment(comment);
   };
+  let post=posts.find((item) => item.id === +id)
 
   return (
     <Comment
       comments={comments}
-      post={posts[id - 1]} //TODO это мы обсуждали. Нужно написать функцию find
-      // post={posts.find((post)=>post.id === id)} //примерно так. Я не проверял, работает она или нет. Посмотри!!!
-      add={newComment}//TODO и нету removeComment. Ты забыла добавить
+      post={post} 
+      add={newComment}
+      remove={removeComment}
     />
   );
 }

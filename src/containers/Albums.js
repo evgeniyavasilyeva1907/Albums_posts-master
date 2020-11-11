@@ -22,7 +22,6 @@ const mapDispatchToProps = dispatch => {
     return {
         getAlbums: () => dispatch({
             type: 'ALBUMS/FETCHED_SAGA'
-
         })
     }
 }

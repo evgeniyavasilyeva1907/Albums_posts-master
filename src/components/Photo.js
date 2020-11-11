@@ -11,10 +11,7 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
   const [editText, setEditText] = useState("");
 
   const inputEl = useRef(null); 
-  //TODO  тут я просто чуть чуть выше поднял этот реф. 
-  //Мне больше нравится (и я считаю, что так правильно), 
-  //что все такие объявления должны быть сверху
-
+ 
   const getFullInfo = (item) => {
     setActimeItem(item);
     handleOpen_Close();
@@ -56,7 +53,7 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
               alt={item.title}
               onClick={() => getFullInfo(item)}
             ></img>
-            <DeleteIcon  //TODO тут ховее нужен какой-то, или cursor: pointer. Чтобы было понятно, что это рабочая кнопка
+            <DeleteIcon  
               className="DeleteIcon"
               color="disabled"
               onClick={() => deletePhoto(item.id)}
