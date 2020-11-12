@@ -6,7 +6,7 @@ import Comment from "./../components/Comment";
 function Post_comment(props) {
   const { comments, posts, getComments, match, deleteComment, addComment } = props;
   const id = match.params.postid;
-  useEffect(() => { 
+  useEffect(() => {
     getComments(id);
   }, [getComments, id]);
 
@@ -17,14 +17,16 @@ function Post_comment(props) {
   const newComment = (comment) => {
     addComment(comment);
   };
-  let post=posts.find((item) => item.id === +id)
+  let post = posts.find((item) => item.id === +id)
 
   return (
     <Comment
+      id={id}
       comments={comments}
-      post={post} 
+      post={post}
       add={newComment}
       remove={removeComment}
+      getComments={getComments}
     />
   );
 }
@@ -60,7 +62,4 @@ export default connect(
 
 
 
-//TODO также случайно заметил, что если ты открываешь комменты, потом перезагружаешь страницу,
-//то у тебя валится ошибка. Нужно это подправить, например придумать какую-нибудь защиту от дурака
-//можно сделать так: если нету данных в /post/2, то сделать редирект на страницу с постами
-// а лучше сделать еще один запрос для получения комментов
+

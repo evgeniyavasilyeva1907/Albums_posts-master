@@ -7,7 +7,8 @@ function Posts ({getPosts, posts}) {
         getPosts()
     } ,[getPosts])
     return(
-        <Post posts={posts}/>
+        <Post posts={posts}
+        />
     )
 }
 

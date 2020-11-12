@@ -18,34 +18,44 @@ function Comment({ comments, post, remove, add }) {
         else (console.log('Заполните поле ввода'))
     }
 
-    return (
-        <div className="post-comment">
-            <div className='Post'>
-                <h3>{post.title}</h3>
-                <div>{post.body} </div>
-            </div>
-            {comments.map((item, index) => {
-                return (
-                    <div key={index} className='comment'>
-                        <div>
-                            <span className='name'>Name: </span>
-                            {item.name}
-                            <span className='email'> email: </span>
-                            {item.email}
+    const getPostWithComments = () => {
+        return (
+            <div className="post-comment">
+                <div className='Post'>
+                    <h3>{post.title}</h3>
+                    <div>{post.body} </div>
+                </div>
+                {comments.map((item, index) => {
+                    return (
+                        <div key={index} className='comment'>
+                            <div>
+                                <span className='name'>Name: </span>
+                                {item.name}
+                                <span className='email'> email: </span>
+                                {item.email}
+                            </div>
+                            <div>{item.body}</div>
+                            <Button onClick={() => remove(item.id)} color="primary">Remove comment</Button>
                         </div>
-                        <div>{item.body}</div>
-                        <Button onClick={() => remove(item.id)} color="primary">Remove comment</Button>
-                    </div>
-                )
-            })}
-            <TextField id="outlined-multiline-static"
-                label="Comment"
-                multiline
-                rows={3}
-                defaultValue="Your comment"
-                variant="outlined"
-                onChange={(e) => setText(e.target.value)} value={text} />
-            <Button variant="contained" onClick={addComment}>Save comment</Button>
-        </div>)
+                    )
+                })}
+                <TextField id="outlined-multiline-static"
+                    label="Comment"
+                    multiline
+                    rows={3}
+                    defaultValue="Your comment"
+                    variant="outlined"
+                    onChange={(e) => setText(e.target.value)} value={text} />
+                <Button variant="contained" onClick={addComment}>Save comment</Button>
+            </div>
+        )
+    }
+
+    return (
+        <div>
+            { post ? getPostWithComments() : (<div>Post is absent</div>)}
+        </div>
+    )
 }
+
 export default Comment
