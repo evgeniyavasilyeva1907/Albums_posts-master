@@ -6,9 +6,11 @@ import Comment from "./../components/Comment";
 function Post_comment(props) {
   const { comments, posts, getComments, match, deleteComment, addComment } = props;
   const id = match.params.postid;
+
   useEffect(() => {
+    const id = +match.params.postid;
     getComments(id);
-  }, [getComments, id]);
+  }, [getComments, match.params.postid]);
 
   const removeComment = (id) => {
     deleteComment(id);
@@ -21,12 +23,10 @@ function Post_comment(props) {
 
   return (
     <Comment
-      id={id}
       comments={comments}
       post={post}
       add={newComment}
       remove={removeComment}
-      getComments={getComments}
     />
   );
 }

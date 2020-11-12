@@ -5,11 +5,14 @@ import CachedIcon from "@material-ui/icons/Cached";
 import Button from "@material-ui/core/Button";
 
 function Photo({ photos, deletePhoto, editTitle, reload }) {
+
   const [activeItem, setActimeItem] = useState({});
   const [OpenEdit, setOpenEdit] = useState(false);
   const [open, setOpen] = useState(false);
   const [editText, setEditText] = useState("");
   const [error, setError] = useState('')
+  const [openRemove, setOpenRemove] = useState(false)
+  const [id, setId] = useState('')
 
   const inputEl = useRef(null);
 
@@ -27,11 +30,11 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
   const edit = (title, id) => {
     if (title.length) {
       editTitle(title, id);
-    setOpenEdit(!OpenEdit);
-    setError('')
+      setOpenEdit(!OpenEdit);
+      setError('')
     }
-    else {setError('Enter image title')}
-    
+    else { setError('Enter image title') }
+
   };
   const isOpenEdit = () => {
     setOpenEdit(!OpenEdit);
@@ -41,6 +44,15 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
   const onButtonClick = () => {
     inputEl.current.click();
   };
+  const removeModalOpen = (id) => {
+    setOpenRemove(!openRemove)
+    setId(id)
+  }
+  const remove = () => {
+    deletePhoto(id)
+    setOpenRemove(!openRemove)
+  }
+
   const upload = (elem, id) => {
     let reader = new FileReader();
     reader.readAsDataURL(elem);
@@ -62,11 +74,20 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
             <DeleteIcon
               className="DeleteIcon"
               color="disabled"
-              onClick={() => deletePhoto(item.id)}
+              onClick={() => removeModalOpen(item.id)}
             />
           </div>
         );
       })}
+      <Modal
+        open={openRemove}
+        onClose={() => setOpenRemove(!openRemove)}>
+        <div className='ModalWindow'>
+          <h3>Delete photo?</h3>
+          <Button variant="contained" onClick={remove}>Remove</Button>
+          <Button variant="contained" onClick={() => setOpenRemove(!openRemove)}>Cancle</Button>
+        </div>
+      </Modal>
       <Modal
         open={open}
         onClose={handleOpen_Close}
@@ -75,11 +96,12 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
         <div className="ModalWindow">
           <div className='fullsize-foto'>
             <img src={activeItem.url} alt={activeItem.title}></img>
-            <CachedIcon 
+            <CachedIcon
               className="Reload"
               color="disabled"
               onClick={onButtonClick}
             />
+
           </div>
           <h3>{activeItem.title}</h3>
           <Button variant="contained" onClick={isOpenEdit}>
