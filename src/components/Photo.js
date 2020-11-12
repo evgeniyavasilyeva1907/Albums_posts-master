@@ -10,8 +10,8 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
   const [open, setOpen] = useState(false);
   const [editText, setEditText] = useState("");
 
-  const inputEl = useRef(null); 
- 
+  const inputEl = useRef(null);
+
   const getFullInfo = (item) => {
     setActimeItem(item);
     handleOpen_Close();
@@ -53,7 +53,7 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
               alt={item.title}
               onClick={() => getFullInfo(item)}
             ></img>
-            <DeleteIcon  
+            <DeleteIcon
               className="DeleteIcon"
               color="disabled"
               onClick={() => deletePhoto(item.id)}
@@ -67,8 +67,15 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
         style={{ overflow: "auto" }}
       >
         <div className="ModalWindow">
-          <img src={activeItem.url} alt={activeItem.title}></img>
-          <div>{activeItem.title}</div>
+          <div className='fullsize-foto'>
+            <img src={activeItem.url} alt={activeItem.title}></img>
+            <CachedIcon 
+              className="Reload"
+              color="disabled"
+              onClick={onButtonClick}
+            />
+          </div>
+          <h3>{activeItem.title}</h3>
           <Button variant="contained" onClick={isOpenEdit}>
             Edit title
           </Button>
@@ -79,16 +86,12 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
             name="file-input"
             onChange={() => upload(inputEl.current.files[0], activeItem.id)}
           ></input>
-          <CachedIcon  //TODO тут тоже, Если бы я не знал, что такая кнопка есть, я бы ее не заметил и не нашел бы
-            className="Reload"
-            color="disabled"
-            onClick={onButtonClick}
-          />
+
         </div>
       </Modal>
       <Modal open={OpenEdit} onClose={isOpenEdit}>
         <div className="ModalWindow">
-          <div>Change title</div>
+          <h3>Change title</h3>
           <input
             value={editText}
             onChange={(e) => setEditText(e.target.value)}

@@ -101,7 +101,16 @@ Button {
   background-color: rgba(255,255,255,0.3);
   padding: 10px;
   overflow: auto;
+  justify-content: space-between;
 }
+.ModalWindow h3{
+  margin: 0 auto;
+}
+.ModalWindow button{
+  margin-top: 5px;
+}
+
+
 .PostsBoard{
   display: flex;
   flex-direction: column;
@@ -128,9 +137,10 @@ Button {
 }
 
 .Reload{
-  right: 50%;
-  bottom: 10%;
+  left: 5px;
+  top: 5px;
   cursor: pointer;
+  position: absolute;
 }
 .photo{
   margin-right: 10px;
@@ -140,11 +150,13 @@ Button {
 .photo img{
   width: 150px;
   height: 150px;
- 
-}
+ }
+ .fullsize-foto{
+   position: relative;
+ }
 .ModalWindow img{
   max-width: 600px;
-  height: auto;
+  max-height: 600px;
 }
 
 .Post a, .Post.post-title{
