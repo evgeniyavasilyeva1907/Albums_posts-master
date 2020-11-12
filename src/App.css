@@ -109,7 +109,9 @@ Button {
 .ModalWindow button{
   margin-top: 5px;
 }
-
+.ModalWindow input{
+  outline: none;
+}
 
 .PostsBoard{
   display: flex;

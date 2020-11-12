@@ -9,6 +9,7 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
   const [OpenEdit, setOpenEdit] = useState(false);
   const [open, setOpen] = useState(false);
   const [editText, setEditText] = useState("");
+  const [error, setError] = useState('')
 
   const inputEl = useRef(null);
 
@@ -24,8 +25,13 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
     reload(image, id);
   };
   const edit = (title, id) => {
-    editTitle(title, id);
+    if (title.length) {
+      editTitle(title, id);
     setOpenEdit(!OpenEdit);
+    setError('')
+    }
+    else {setError('Enter image title')}
+    
   };
   const isOpenEdit = () => {
     setOpenEdit(!OpenEdit);
@@ -93,9 +99,10 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
         <div className="ModalWindow">
           <h3>Change title</h3>
           <input
-            value={editText}
+            value={editText} id='edit-title'
             onChange={(e) => setEditText(e.target.value)}
           ></input>
+          <label for='edit-title'>{error}</label>
           <Button
             variant="contained"
             onClick={() => edit(editText, activeItem.id)}
