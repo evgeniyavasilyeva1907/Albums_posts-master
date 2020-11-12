@@ -102,7 +102,7 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
             value={editText} id='edit-title'
             onChange={(e) => setEditText(e.target.value)}
           ></input>
-          <label for='edit-title'>{error}</label>
+          <label htmlFor='edit-title'>{error}</label>
           <Button
             variant="contained"
             onClick={() => edit(editText, activeItem.id)}

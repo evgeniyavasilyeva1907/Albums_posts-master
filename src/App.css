@@ -187,3 +187,6 @@ a{
   margin: 0 auto;
   justify-content: space-around;
 }
+.post-comment button{
+  margin: 7px 0;
+}

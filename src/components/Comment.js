@@ -4,8 +4,10 @@ import Button from '@material-ui/core/Button';
 
 function Comment({ comments, post, remove, add }) {
     const [text, setText] = useState();
+    const [error, setError] = useState()
 
     const addComment = () => {
+
         if (text) {
             const comment = {
                 postId: post.id,
@@ -14,8 +16,9 @@ function Comment({ comments, post, remove, add }) {
                 body: text.trim(),
             }
             add(comment)
+            setError('')
         }
-        else (console.log('Заполните поле ввода'))
+        else (setError('Enter your comment'))
     }
 
     const getPostWithComments = () => {
@@ -46,6 +49,7 @@ function Comment({ comments, post, remove, add }) {
                     defaultValue="Your comment"
                     variant="outlined"
                     onChange={(e) => setText(e.target.value)} value={text} />
+                <label htmlFor ='outlined-multiline-static'>{error}</label>
                 <Button variant="contained" onClick={addComment}>Save comment</Button>
             </div>
         )
