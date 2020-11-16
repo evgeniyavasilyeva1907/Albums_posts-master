@@ -51,6 +51,7 @@
 
 .Album{
   width: 30%;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   text-align: center;
