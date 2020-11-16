@@ -61,3 +61,4 @@ For posts and albums you need to provide statitics: display information as chart
 }
 
 export default App;
+
