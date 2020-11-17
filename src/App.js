@@ -18,10 +18,10 @@ function App() {
   return (
     <div className="App">
       <div className='Menu'>
-        <NavLink activeClassName='active' to='/' exact> <Button variant="contained">Main Page</Button> </NavLink>
-        <NavLink activeClassName='active' to='/albums' exact> <Button variant="contained">Albums</Button> </NavLink>
-        <NavLink activeClassName='active' to='/posts' exact> <Button variant="contained">Posts</Button> </NavLink>
-        <NavLink activeClassName='active' to='/statistic' exact> <Button variant="contained">Statistic</Button> </NavLink>
+        <NavLink activeClassName='active' to='/' exact> <Button >Main Page</Button> </NavLink>
+        <NavLink activeClassName='active' to='/albums' exact> <Button >Albums</Button> </NavLink>
+        <NavLink activeClassName='active' to='/posts' exact> <Button >Posts</Button> </NavLink>
+        <NavLink activeClassName='active' to='/statistic' exact> <Button >Statistic</Button> </NavLink>
       </div>
       <h1>My application</h1>
       <div className='container'>
@@ -47,7 +47,7 @@ For posts and albums you need to provide statitics: display information as chart
               <Posts />
             </Route>
             <Route path='/statistic' exact >
-              <Statistic/>
+              <Statistic />
             </Route>
             <Route path='/albums/:albumid' component={PhotosBoard} />
             <Route path='/posts/:postid' component={Post_comment} />

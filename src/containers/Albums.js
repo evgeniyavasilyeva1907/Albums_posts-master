@@ -18,12 +18,15 @@ function Albums({ getAlbums, albums }) {
     return (
         <div >
             <Album albums={newAlbums} />
+            <div className='pagination'>
                 <Pagination count={10}
                     color="primary"
                     defaultPage={1}
                     page={page}
                     onChange={getNumber}
                 />
+            </div>
+
         </div>
     )
 }

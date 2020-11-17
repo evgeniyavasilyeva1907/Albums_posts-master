@@ -3,6 +3,7 @@ import Modal from "@material-ui/core/Modal";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CachedIcon from "@material-ui/icons/Cached";
 import Button from "@material-ui/core/Button";
+import Input from '@material-ui/core/Input';
 
 function Photo({ photos, deletePhoto, editTitle, reload }) {
 
@@ -83,7 +84,7 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
         open={openRemove}
         onClose={() => setOpenRemove(!openRemove)}>
         <div className='ModalWindow'>
-          <h3>Delete photo?</h3>
+          <h3>Remove photo?</h3>
           <Button variant="contained" onClick={remove}>Remove</Button>
           <Button variant="contained" onClick={() => setOpenRemove(!openRemove)}>Cancle</Button>
         </div>
@@ -93,7 +94,7 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
         onClose={handleOpen_Close}
         style={{ overflow: "auto" }}
       >
-        <div className="ModalWindow">
+        <div className="ModalPhoto">
           <div className='fullsize-foto'>
             <img src={activeItem.url} alt={activeItem.title}></img>
             <CachedIcon
@@ -120,10 +121,10 @@ function Photo({ photos, deletePhoto, editTitle, reload }) {
       <Modal open={OpenEdit} onClose={isOpenEdit}>
         <div className="ModalWindow">
           <h3>Change title</h3>
-          <input
+          <Input
             value={editText} id='edit-title'
             onChange={(e) => setEditText(e.target.value)}
-          ></input>
+          ></Input>
           <label htmlFor='edit-title'>{error}</label>
           <Button
             variant="contained"

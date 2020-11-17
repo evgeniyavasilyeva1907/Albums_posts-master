@@ -19,14 +19,15 @@ function Posts({ getPosts, posts }) {
     return (
         <div >
             <Post posts={newPosts} />
-            <Pagination count={10}
-                color="primary"
-                defaultPage={1}
-                page={page}
-                onChange={getNumber}
-            />
+            <div className='pagination'>
+                <Pagination count={10}
+                    color="primary"
+                    defaultPage={1}
+                    page={page}
+                    onChange={getNumber}
+                />
+            </div>
         </div>
-
     )
 }
 
